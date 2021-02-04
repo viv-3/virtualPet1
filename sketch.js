@@ -6,15 +6,16 @@ var foodStock;
 
 function preload()
 {
-  dogImg = loadImage("dogImg.png")
-  happyDogImg = loadImage("dogImg1.png")
+  dogImg = loadImage("images/dogImg.png")
+  happyDogImg = loadImage("images/dogImg1.png")
 }
 
 function setup() {
   createCanvas(500, 500);
   
-  dog = createSprite(200,200)
+  dog = createSprite(200,280)
   dog.addImage(dogImg)
+  dog.scale = 0.5
 
   database = firebase.database();
   foodStock = database.ref("food");
@@ -27,10 +28,11 @@ function draw() {
   background(46,139,87)
 
   if(keyWentDown(UP_ARROW)){
-    writeStock(Foods);
+   
+    writeStock(foodS);
     dog.addImage(happyDogImg);
-
   }
+
   drawSprites();
  
   textSize = 15
@@ -44,7 +46,7 @@ function readStock(data){
   foodS = data.val();
 }
 
-function writeStock(){
+function writeStock(x){
   database.ref("/").update({
     Food:x
   })
